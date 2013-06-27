@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:padding="10dip"
+    tools:context=".YourPhotoActivity" >    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center|top"
+        android:orientation="vertical" >
+        
+        <!-- <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="savePhoto"
+        android:text="@string/save_tag" /> -->
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="191dp"
+            android:layout_height="259dp"
+            android:src="@drawable/ic_launcher" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/note_hint"
+            android:inputType="textMultiLine" />        
+
+    </LinearLayout>
+
+</LinearLayout>

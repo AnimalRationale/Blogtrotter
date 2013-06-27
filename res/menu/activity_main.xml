@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >    
+
+    <item
+        android:id="@+id/menu_add_button"
+        android:icon="@drawable/sncamera"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/add_photo_tag"
+        /> 
+    <item
+        android:id="@+id/menu_big_map_button"
+        android:icon="@drawable/snmap"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/show_big_map_tag"
+        />
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/menu_settings"/> 
+    <item
+        android:id="@+id/menu_about"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/menu_about"/>
+    <item
+        android:id="@+id/menu_help"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/menu_help"/>         
+</menu>

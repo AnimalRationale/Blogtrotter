@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <!--
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
+         android:gravity="center_vertical"
+         android:orientation="vertical" >
+
+          <CheckBox
+             android:id="@+id/checkBox1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"             
+             android:text="" />
+         
+    </LinearLayout>
+    -->
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_gravity="top"
+        android:layout_weight="1"        
+        android:src="@android:drawable/ic_menu_gallery" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textViewDate2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="date"
+            android:textColor="@color/DarkGray"
+            android:textSize="11dp" />
+
+        <TextView
+            android:id="@+id/textView_gps"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="gps"
+            android:textColor="@color/CornflowerBlue" />
+
+        <TextView
+            android:id="@+id/textViewNote"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:text="text" />
+    </LinearLayout>
+
+</LinearLayout>
