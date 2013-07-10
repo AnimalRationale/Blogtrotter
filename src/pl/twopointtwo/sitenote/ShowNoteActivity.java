@@ -161,8 +161,15 @@ public class ShowNoteActivity extends TabActivity {
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.menu_edit_note:
+			editNote();
+			return true;		
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void editNote() {
+		
 	}
 
 	private String dmsToDeg(String gpsExif) {

@@ -109,8 +109,17 @@ public class LocationMapActivity extends Activity implements OnMapClickListener 
 		mMap.clear();
 		makeMarker(point);
 		finalLocation = point;
+	}    
+	
+	public void changeMapType() {
+		if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+			mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		} else
+			if (mMap.getMapType() == GoogleMap.MAP_TYPE_HYBRID) {
+				mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+			}
 	}
-
+	
 	public void saveEditedLocation() {
 		if (finalLocation != null) {
 			DbHelper mDbHelper = new DbHelper(LocationMapActivity.this);
@@ -257,6 +266,9 @@ public class LocationMapActivity extends Activity implements OnMapClickListener 
 			return true;
 		case R.id.menu_save_edited_location:
 			saveEditedLocation();
+			return true;
+		case R.id.menu_change_map_type:
+			changeMapType();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

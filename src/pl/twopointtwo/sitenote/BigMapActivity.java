@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class BigMapActivity extends Activity {
 
 	private LatLng notePoint;
+	private GoogleMap mMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,7 @@ public class BigMapActivity extends Activity {
 		setupActionBar();
 
 		final LatLng KRAKOW = new LatLng(50.06601, 19.945064);
-
-		final GoogleMap mMap;
+		
 		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
 
@@ -155,8 +155,20 @@ public class BigMapActivity extends Activity {
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.menu_change_map_type:
+			changeMapType();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void changeMapType() {
+		if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+			mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		} else
+			if (mMap.getMapType() == GoogleMap.MAP_TYPE_HYBRID) {
+				mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+			}
 	}
 
 	private Float dmsToDeg(String gpsExif) {

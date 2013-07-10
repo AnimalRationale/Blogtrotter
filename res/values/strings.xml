@@ -8,6 +8,7 @@
     <string name="menu_edit_note">Edit note</string>
     <string name="add_photo_tag">Add photo</string>
     <string name="show_big_map_tag">Show map</string>
+    <string name="change_map_type">Map type</string>
     <string name="browse_photo_tag">Browse</string>
     <string name="title_activity_your_photo">SiteNote</string>
     <string name="save_tag">Save</string>

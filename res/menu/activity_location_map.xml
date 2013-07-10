@@ -12,4 +12,11 @@
         android:showAsAction="ifRoom|withText"
         android:title="@string/save_edited_location"
         />
+    <item
+        android:id="@+id/menu_change_map_type"
+        android:icon="@drawable/snmaptype"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/change_map_type"
+        />
 </menu>
