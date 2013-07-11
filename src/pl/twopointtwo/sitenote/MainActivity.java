@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
 
 	public static ArrayList<DataSet> noteList = new ArrayList<DataSet>();
 
-	private ImageAdapter imageAdapter;
+	public static ImageAdapter imageAdapter;
 	private ListView lv;
 
 	@Override
@@ -131,6 +131,7 @@ public class MainActivity extends Activity {
 				// Set of parameters sent to ShowNoteActivity, it could be done
 				// in one Array of Strings
 				// but we are still not sure what finally we'll need to send
+				intent.putExtra(EDIT_NOTE_LIST_INDEX, String.valueOf(position));				
 				intent.putExtra(SHOW_NOTE_FILE, item.getFile());
 				intent.putExtra(SHOW_NOTE_DATE, item.getDateTime());
 				intent.putExtra(SHOW_NOTE_NOTE, item.getNote());

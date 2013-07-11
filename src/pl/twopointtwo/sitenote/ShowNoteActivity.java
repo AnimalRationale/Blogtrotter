@@ -23,6 +23,9 @@ public class ShowNoteActivity extends TabActivity {
 
 	private String nLa;
 	private String nLo;
+	TextView noteTextView = null;
+	String noteListIndex;
+	private static final int SN_EDIT_NOTE_REQUEST = 1699;
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -35,11 +38,12 @@ public class ShowNoteActivity extends TabActivity {
 
 		String style = "";		
 		WebView noteWebView = null;
-		WebView noteMapView = null;
-		TextView noteTextView = null;
+		WebView noteMapView = null;		
 		TextView noteDateView = null;
 
 		Intent intent = getIntent();
+		noteListIndex = intent.getStringExtra(MainActivity.EDIT_NOTE_LIST_INDEX);
+		Log.d("LogInfo001", "SNA - noteListIndex == " + noteListIndex);
 		String noteImageFile = intent.getStringExtra(MainActivity.SHOW_NOTE_FILE);
 		String noteDate = intent.getStringExtra(MainActivity.SHOW_NOTE_DATE);
 		String noteText = intent.getStringExtra(MainActivity.SHOW_NOTE_NOTE);
@@ -151,27 +155,56 @@ public class ShowNoteActivity extends TabActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+		case android.R.id.home:			
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		case R.id.menu_edit_note:
-			editNote();
+			editNote(Integer.parseInt(noteListIndex));
 			return true;		
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private void editNote() {
-		
+	private void editNote(int listInd) {
+		Intent intentEditNote = new Intent(getApplicationContext(),
+				EditNoteActivity.class);
+		final int listIndex = listInd;
+		final String dbId = MainActivity.noteList.get(listIndex).getDbId();
+		final String note = MainActivity.noteList.get(listIndex).getNote();
+		final String thumb = MainActivity.noteList.get(listIndex).getThumb();
+		final String thumbRotation = String.valueOf(MainActivity.noteList.get(listIndex)
+				.getRotation());
+		final String intentListIndex = String.valueOf(listIndex);
+		intentEditNote.putExtra(MainActivity.DB_ID, dbId);
+		intentEditNote.putExtra(MainActivity.SHOW_NOTE_NOTE, note);
+		intentEditNote.putExtra(MainActivity.THUMB_FILE, thumb);
+		intentEditNote.putExtra(MainActivity.THUMB_ROTATION, thumbRotation);
+		intentEditNote.putExtra(MainActivity.EDIT_NOTE_LIST_INDEX, intentListIndex);		
+		startActivityForResult(intentEditNote, SN_EDIT_NOTE_REQUEST);
 	}
 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.d("LogInfo001", "SNA - EditNote onActivityResult");
+		
+		if (requestCode == SN_EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
+
+			int intListIndex = Integer.parseInt(data.getExtras().getString(
+					"editedNoteListIndex"));
+			noteTextView.setText(data.getExtras().getString("editedNote"));
+			MainActivity.noteList.get(intListIndex).setNote(
+					data.getExtras().getString("editedNote"));			
+			MainActivity.imageAdapter.notifyDataSetChanged();
+		}
+//		if (requestCode == SN_EDIT_LOCATION_REQUEST && resultCode == RESULT_OK) {
+//			int intListIndex = Integer.parseInt(data.getExtras().getString(
+//					"editedNoteListIndex"));
+//			noteList.get(intListIndex).setLocation(
+//					data.getExtras().getString("editedLocation"));
+//			imageAdapter.notifyDataSetChanged();
+//		}
+
+	}
+	
 	private String dmsToDeg(String gpsExif) {
 		
 		Float result = null;
