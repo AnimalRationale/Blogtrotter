@@ -90,6 +90,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.twopointtwo.sitenote.MainActivity" />
         </activity>
+        <activity
+            android:name="pl.twopointtwo.sitenote.ExportNoteActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_export_note"
+            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.twopointtwo.sitenote.MainActivity" />
+        </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyB85ngjIXma4o9URlOwjSUA8hOcyo6CfSw"/>        

@@ -71,7 +71,7 @@ public class ShowNoteActivity extends TabActivity {
 		// image WebView
 		noteWebView = (WebView) findViewById(R.id.noteImage);
 		noteWebView.getSettings().setBuiltInZoomControls(true);		
-		noteWebView.setBackgroundColor(0);
+		noteWebView.setBackgroundColor(Color.BLACK);
 		noteWebView.getSettings().setUseWideViewPort(true);
 		noteWebView.getSettings().setLoadWithOverviewMode(true);						
 		File imageFile = new File(noteImageFile);		
@@ -186,7 +186,7 @@ public class ShowNoteActivity extends TabActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.d("LogInfo001", "SNA - EditNote onActivityResult");
 		
-		if (requestCode == SN_EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
+		if (requestCode == SN_EDIT_NOTE_REQUEST && resultCode == RESULT_OK && data != null) {
 
 			int intListIndex = Integer.parseInt(data.getExtras().getString(
 					"editedNoteListIndex"));

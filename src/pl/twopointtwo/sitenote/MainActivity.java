@@ -197,6 +197,9 @@ public class MainActivity extends Activity {
 		case R.id.con_menu_restore_location:
 			restoreLocation(info.position);
 			return true;
+		case R.id.con_menu_export_note:
+			exportNote(info.position);
+			return true;
 		case R.id.con_menu_dell_all:
 			deleteAllNotes();
 			return true;
@@ -271,6 +274,10 @@ public class MainActivity extends Activity {
 
 		noteList.get(listInd).setLocation(location);
 		imageAdapter.notifyDataSetChanged();
+	}
+	
+	private void exportNote(int listInd) {
+		
 	}
 
 	private void deleteAllNotes() {
@@ -373,7 +380,7 @@ public class MainActivity extends Activity {
 		if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
 			isAfterOnActivityResult = true;
 		}
-		if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
+		if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK && data != null) {
 
 			int intListIndex = Integer.parseInt(data.getExtras().getString(
 					"editedNoteListIndex"));
@@ -381,7 +388,7 @@ public class MainActivity extends Activity {
 					data.getExtras().getString("editedNote"));
 			imageAdapter.notifyDataSetChanged();
 		}
-		if (requestCode == EDIT_LOCATION_REQUEST && resultCode == RESULT_OK) {
+		if (requestCode == EDIT_LOCATION_REQUEST && resultCode == RESULT_OK && data != null) {
 			int intListIndex = Integer.parseInt(data.getExtras().getString(
 					"editedNoteListIndex"));
 			noteList.get(intListIndex).setLocation(

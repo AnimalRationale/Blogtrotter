@@ -20,6 +20,12 @@
         android:showAsAction="never"        
         /> 
  <item
+        android:id="@+id/con_menu_export_note"
+        android:orderInCategory="100"        
+        android:title="@string/context_menu_export_note"
+        android:showAsAction="never"        
+        />
+ <item
         android:id="@+id/con_menu_del"
         android:orderInCategory="100"        
         android:title="@string/context_menu_delete_note"
