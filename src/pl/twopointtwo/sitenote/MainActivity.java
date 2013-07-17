@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
 	private static final int CAMERA_REQUEST = 1888;
 	private static final int EDIT_NOTE_REQUEST = 1999;
 	private static final int EDIT_LOCATION_REQUEST = 1799;
+	private static final int EXPORT_NOTE_REQUEST = 1699;
 
 	public static final String EDIT_NOTE_LIST_INDEX = "pl.twopointtwo.sitenote.EDIT_NOTE_INDEX";
 	public static final String YOUR_PHOTO_START = "pl.twopointtwo.sitenote.dodajZdjecie";
@@ -277,7 +278,34 @@ public class MainActivity extends Activity {
 	}
 	
 	private void exportNote(int listInd) {
+		Intent intentExportNote = new Intent(getApplicationContext(),
+				ExportNoteActivity.class);
+		final int listIndex = listInd;
+		final String dbId = noteList.get(listIndex).getDbId();
+		final String note = noteList.get(listIndex).getNote();
+		final String thumb = noteList.get(listIndex).getThumb();
+		final String thumbRotation = String.valueOf(noteList.get(listIndex)
+				.getRotation());
+		final String intentListIndex = String.valueOf(listIndex);
+		intentExportNote.putExtra(DB_ID, dbId);
+		intentExportNote.putExtra(SHOW_NOTE_NOTE, note);
+		intentExportNote.putExtra(THUMB_FILE, thumb);
+		intentExportNote.putExtra(THUMB_ROTATION, thumbRotation);
+		intentExportNote.putExtra(EDIT_NOTE_LIST_INDEX, intentListIndex);
 		
+		intentExportNote.putExtra(SHOW_NOTE_FILE, noteList.get(listIndex).getFile());
+		intentExportNote.putExtra(SHOW_NOTE_DATE, noteList.get(listIndex).getDateTime());		
+		intentExportNote.putExtra(SHOW_NOTE_LOCATION, noteList.get(listIndex).getLocation());
+		intentExportNote.putExtra(SHOW_NOTE_LATITUDE, noteList.get(listIndex).getExifGpsLatitude());
+		intentExportNote.putExtra(SHOW_NOTE_LATITUDE_REF,
+				noteList.get(listIndex).getExifGpsLatitudeRef());
+		intentExportNote.putExtra(SHOW_NOTE_LONGITUDE, noteList.get(listIndex).getExifGpsLongitude());
+		intentExportNote.putExtra(SHOW_NOTE_LONGITUDE_REF,
+				noteList.get(listIndex).getExifGpsLongitudeRef());
+		intentExportNote.putExtra(SHOW_NOTE_EXIF_ORIENT,
+				noteList.get(listIndex).getExifOrientation());
+		
+		startActivityForResult(intentExportNote, EXPORT_NOTE_REQUEST);
 	}
 
 	private void deleteAllNotes() {
