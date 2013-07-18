@@ -13,7 +13,7 @@
     <string name="save_tag">Save</string>
     <string name="save_edited_note">Save note</string>
     <string name="save_edited_location">Save location</string>
-    <string name="note_hint">Enter text of your note...</string>
+    <string name="note_hint">Enter text of your note&#8230;</string>
     <string name="storage_alert">SD Memory Card Problem!</string>
     <string name="sql_update_alert">Problem with updating note!</string>
     <string name="copy_alert">Problem with copying file!</string>
@@ -30,7 +30,7 @@
     <string name="hello_world">Hello world!</string>    
     <string name="neg_button">Cancel</string>
     <string name="pos_button">Yes</string>    
-    <string name="save_img_msg">Saving image...</string>
+    <string name="save_img_msg">Saving image&#8230;</string>
     <string name="note_date">Date of note is not available.</string>
     <string name="note_text">Text of note is not available.</string>
     <string name="context_menu_edit_note">Edit note</string>
@@ -43,7 +43,8 @@
     <string name="context_menu_delete_all">Delete ALL notes</string>
     <string name="delete_all_msg">Are you sure you want to delete all notes?</string>
     <string name="context_menu_export_note">Send note to blog</string>
-    <string name="server_hint">Enter your blog address...</string> 
+    <string name="blog_note_title_hint">Enter your blog note title&#8230;</string> 
     <string name="button_send_note">Send note</string>
+    <string name="note_to_blog">Sending note to blog&#8230;</string>
     
 </resources>

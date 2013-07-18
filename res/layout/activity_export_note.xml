@@ -11,11 +11,11 @@
             android:src="@drawable/ic_launcher" />
 
      <EditText
-            android:id="@+id/enterServer"
+            android:id="@+id/enterTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/server_hint"
+            android:hint="@string/blog_note_title_hint"
             android:inputType="textMultiLine" />
      <Button
         android:id="@+id/button_send_note"

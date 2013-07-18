@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,15 +27,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ExportNoteActivity extends Activity {
 	
+	private TextView editNoteTitle;
 	private String note;
+	private String title;
 	private String location;
 	private String date;
+	private String time;
 	private String thumb;
 	private String photo;
 	
@@ -55,7 +62,11 @@ public class ExportNoteActivity extends Activity {
 		String listIndex = intent
 				.getStringExtra(MainActivity.EDIT_NOTE_LIST_INDEX);
 		
-		date = intent.getStringExtra(MainActivity.SHOW_NOTE_DATE);
+		String date_time = intent.getStringExtra(MainActivity.SHOW_NOTE_DATE);
+		String[] date_time_split = date_time.split(" ");
+		date = date_time_split[0];
+		time = date_time_split[1];
+		
 		location = intent.getStringExtra(MainActivity.SHOW_NOTE_LOCATION);
 		photo = intent.getStringExtra(MainActivity.SHOW_NOTE_FILE);
 		
@@ -66,28 +77,37 @@ public class ExportNoteActivity extends Activity {
 		imageView.setRotation(rotation.floatValue());
 		imgLoader.loadBitmap(thumb, imageView);
 
+		editNoteTitle = (EditText)findViewById(R.id.enterTitle);		
+		// editNoteTitle.setText("", TextView.BufferType.EDITABLE);
+		editNoteTitle.requestFocus();
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	    imm.restartInput(editNoteTitle);
+	    
 		Button button = (Button) findViewById(R.id.button_send_note);
+		
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(ExportNoteActivity.this, "Trying to postData",
+				Toast.makeText(ExportNoteActivity.this, R.string.note_to_blog,
 						Toast.LENGTH_SHORT).show();
 				new Thread(new Runnable() {
 					// Thread to stop network calls on the UI thread
 					public void run() {
+						title = editNoteTitle.getText().toString();
+						if (title == null) {title = "No title";}
 						// Request the HTML
 						try {
 							JSONObject json = new JSONObject();
-							json.put("key", "Blogtrotter.v01");
+							json.put("pass", "Blogtrotter.v01.236");
+							json.put("author", "Autor");
 							json.put("date", date);
-							json.put("title", "No title");
+							json.put("time", time);
+							json.put("title", title);
 							json.put("location", location);
 							json.put("note", note);
 							json.put("thumb", thumb);
-							json.put("photo", photo);
-							
-							postData(json);
-							
+							json.put("photo", photo);							
+							postData(json);							
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -99,7 +119,7 @@ public class ExportNoteActivity extends Activity {
 
 	public void postData(JSONObject json) throws JSONException {
 		HttpClient httpclient = new DefaultHttpClient();
-		String URL_BASE = "http://infodump.pl/note/upload01.php";
+		String URL_BASE = "http://infodump.pl/note";
 
 		try {
 			URL url = new URL(URL_BASE + "/noteuploader01.php");
@@ -107,7 +127,7 @@ public class ExportNoteActivity extends Activity {
 
 			List<NameValuePair> nvp = new ArrayList<NameValuePair>(2);
 			nvp.add(new BasicNameValuePair("json", json.toString()));
-			httppost.setHeader("Content-type", "application/json");
+			// httppost.setHeader("Content-type", "application/json");
 			httppost.setEntity(new UrlEncodedFormEntity(nvp, "UTF-8"));
 			Log.d("LogInfo001", "ExNA - NVP: " + nvp);
 
