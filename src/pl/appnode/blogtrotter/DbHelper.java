@@ -1,4 +1,4 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,8 +7,8 @@ import android.provider.BaseColumns;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 7;
-	private static final String DATABASE_NAME = "SiteNote.db";
+	private static final int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME = "Blogtrotter.db";
 
 	public static abstract class FeedSiteNote implements BaseColumns {
 		public static final String TABLE_NAME = "sitenote";
@@ -24,7 +24,9 @@ public class DbHelper extends SQLiteOpenHelper {
 		public static final String COLUMN_NAME_EXIF_GPS_LATITUDEREF = "exifgpslatituderef";
 		public static final String COLUMN_NAME_EXIF_GPS_LONGITUDE = "exifgpslongitude";
 		public static final String COLUMN_NAME_EXIF_GPS_LONGITUDEREF = "exifgpslongituderef";
-
+		public static final String COLUMN_NAME_TAGS = "tags";
+		public static final String COLUMN_NAME_PUBLISHED = "published";
+		
 		private FeedSiteNote() {}; // aby zapobiec tworzeniu obiektu klasy typu contract tworzymy pusty konstruktor
 
 	}
@@ -45,7 +47,9 @@ public class DbHelper extends SQLiteOpenHelper {
 																	+ FeedSiteNote.COLUMN_NAME_EXIF_GPS_LATITUDE + TEXT_TYPE + COMMA_SEP
 																	+ FeedSiteNote.COLUMN_NAME_EXIF_GPS_LATITUDEREF + TEXT_TYPE + COMMA_SEP
 																	+ FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDE + TEXT_TYPE + COMMA_SEP
-																	+ FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF + TEXT_TYPE
+																	+ FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF + TEXT_TYPE + COMMA_SEP
+																	+ FeedSiteNote.COLUMN_NAME_TAGS + TEXT_TYPE + COMMA_SEP
+																	+ FeedSiteNote.COLUMN_NAME_PUBLISHED + TEXT_TYPE
 			+" )";
 
 	private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + FeedSiteNote.TABLE_NAME;

@@ -1,6 +1,8 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.util.Random;
+
+import pl.appnode.blogtrotter.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

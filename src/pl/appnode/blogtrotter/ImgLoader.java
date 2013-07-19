@@ -1,4 +1,4 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.lang.ref.WeakReference;
 

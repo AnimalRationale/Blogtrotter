@@ -1,4 +1,4 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 public class DataSet {	
 	
@@ -15,9 +15,11 @@ public class DataSet {
 	private String exifGpsLatitudeRef; 
 	private String exifGpsLongitude;
 	private String exifGpsLongitudeRef; //Format is "num1/denom1,num2/denom2,num3/denom3".
-		
+	private String tags;
+	private String published;
+	
 	public DataSet(String dbId, String id, String dateTime, String file, String thumb, String note, String location, double rotation, String exifOrientation,
-			String exifGpsLatitude, String exifGpsLatitudeRef, String exifGpsLongitude, String exifGpsLongitudeRef) {
+			String exifGpsLatitude, String exifGpsLatitudeRef, String exifGpsLongitude, String exifGpsLongitudeRef, String tags, String published) {
 		super();
 		this.dbId = dbId;
 		this.id = id;
@@ -32,6 +34,8 @@ public class DataSet {
 		this.exifGpsLatitudeRef = exifGpsLatitudeRef;
 		this.exifGpsLongitude = exifGpsLongitude;
 		this.exifGpsLongitudeRef = exifGpsLongitudeRef;
+		this.tags = tags;
+		this.published = published;
 	}
 	
 	public String getDbId() {
@@ -114,5 +118,18 @@ public class DataSet {
 
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
-	}	
+	}
+	
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	public String getPublished() {
+		return published;
+	}
+	public void setPublished(String published) {
+		this.published = published;
+	}
 }

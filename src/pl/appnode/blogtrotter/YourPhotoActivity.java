@@ -1,4 +1,4 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import pl.appnode.blogtrotter.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -147,7 +149,9 @@ public class YourPhotoActivity extends Activity {
 			String thumb = thumbDir.getPath() + File.separator + id;
 			String note = textView.getText().toString();
 			String location = "";
-
+			String tags = "";
+			String published = "";
+			
 			String[] exif = readExif(params[0]);	
 			
 			double rotation;
@@ -174,7 +178,10 @@ public class YourPhotoActivity extends Activity {
 			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LATITUDE, exif[1]);
 			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LATITUDEREF, exif[2]);
 			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDE, exif[3]);
-			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF, exif[4]);			
+			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF, exif[4]);
+			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_TAGS, tags);
+			values.put(DbHelper.FeedSiteNote.COLUMN_NAME_PUBLISHED, published);
+			
 			publishProgress(5);
 			// Insert the new row, returning the primary key value of the new
 			// row
@@ -190,7 +197,7 @@ public class YourPhotoActivity extends Activity {
 			publishProgress(9);
 			
 			MainActivity.noteList.add(0, new DataSet(String.valueOf(newRowId), id,
-					dateTime, params[0], thumb, note, location, rotation, exif[0], exif[1], exif[2], exif[3], exif[4]));
+					dateTime, params[0], thumb, note, location, rotation, exif[0], exif[1], exif[2], exif[3], exif[4], tags, published));
 
 			return null;// newRowId;
 		}

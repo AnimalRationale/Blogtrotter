@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pl.twopointtwo.sitenote"
+    package="pl.appnode.blogtrotter"
     android:versionCode="1"
     android:versionName="0.9" >
 
@@ -9,12 +9,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="pl.twopointtwo.sitenote.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="pl.appnode.blogtrotter.permission.MAPS_RECEIVE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
         
     <permission
-            android:name="pl.twopointtwo.sitenote.permission.MAPS_RECEIVE"
+            android:name="pl.appnode.blogtrotter.permission.MAPS_RECEIVE"
             android:protectionLevel="signature"/>
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -30,7 +30,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo" >
         <activity
-            android:name="pl.twopointtwo.sitenote.MainActivity"
+            android:name="pl.appnode.blogtrotter.MainActivity"
             android:label="@string/app_name" 
             android:screenOrientation="portrait"
             >
@@ -45,59 +45,59 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="pl.twopointtwo.sitenote.YourPhotoActivity"
+            android:name="pl.appnode.blogtrotter.YourPhotoActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_your_photo"
-            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" 
+            android:parentActivityName="pl.appnode.blogtrotter.MainActivity" 
            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.twopointtwo.sitenote.MainActivity" />            
+                android:value="pl.appnode.blogtrotter.MainActivity" />            
         </activity>
         <activity
-            android:name="pl.twopointtwo.sitenote.ShowNoteActivity"
+            android:name="pl.appnode.blogtrotter.ShowNoteActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_show_note"
-            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" >
+            android:parentActivityName="pl.appnode.blogtrotter.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.twopointtwo.sitenote.MainActivity" />
+                android:value="pl.appnode.blogtrotter.MainActivity" />
         </activity>
         <activity
-            android:name="pl.twopointtwo.sitenote.BigMapActivity"
+            android:name="pl.appnode.blogtrotter.BigMapActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_big_map"
-            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" >
+            android:parentActivityName="pl.appnode.blogtrotter.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.twopointtwo.sitenote.MainActivity" />
+                android:value="pl.appnode.blogtrotter.MainActivity" />
         </activity>
         <activity
-            android:name="pl.twopointtwo.sitenote.EditNoteActivity"
+            android:name="pl.appnode.blogtrotter.EditNoteActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_edit_note"
-            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" >
+            android:parentActivityName="pl.appnode.blogtrotter.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.twopointtwo.sitenote.MainActivity" />
+                android:value="pl.appnode.blogtrotter.MainActivity" />
         </activity>
         <activity
-            android:name="pl.twopointtwo.sitenote.LocationMapActivity"
+            android:name="pl.appnode.blogtrotter.LocationMapActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_location_map"
-            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" >
+            android:parentActivityName="pl.appnode.blogtrotter.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.twopointtwo.sitenote.MainActivity" />
+                android:value="pl.appnode.blogtrotter.MainActivity" />
         </activity>
         <activity
-            android:name="pl.twopointtwo.sitenote.ExportNoteActivity"
+            android:name="pl.appnode.blogtrotter.ExportNoteActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_export_note"
-            android:parentActivityName="pl.twopointtwo.sitenote.MainActivity" >
+            android:parentActivityName="pl.appnode.blogtrotter.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.twopointtwo.sitenote.MainActivity" />
+                android:value="pl.appnode.blogtrotter.MainActivity" />
         </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

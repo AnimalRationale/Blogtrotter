@@ -1,6 +1,8 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.util.ArrayList;
+
+import pl.appnode.blogtrotter.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

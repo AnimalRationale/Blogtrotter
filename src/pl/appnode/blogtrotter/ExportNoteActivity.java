@@ -1,4 +1,4 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +15,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import pl.appnode.blogtrotter.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -37,6 +39,7 @@ import android.widget.Toast;
 public class ExportNoteActivity extends Activity {
 	
 	private TextView editNoteTitle;
+	private String note_id;
 	private String note;
 	private String title;
 	private String location;
@@ -68,7 +71,10 @@ public class ExportNoteActivity extends Activity {
 		time = date_time_split[1];
 		
 		location = intent.getStringExtra(MainActivity.SHOW_NOTE_LOCATION);
+		
 		photo = intent.getStringExtra(MainActivity.SHOW_NOTE_FILE);
+		note_id = photo.substring(photo.length() - 17);
+		note_id = note_id.replace(".jpg", "");
 		
 		Double rotation = Double.parseDouble(thumbRotation);
 
@@ -99,6 +105,7 @@ public class ExportNoteActivity extends Activity {
 						try {
 							JSONObject json = new JSONObject();
 							json.put("pass", "Blogtrotter.v01.236");
+							json.put("note_id", note_id);
 							json.put("author", "Autor");
 							json.put("date", date);
 							json.put("time", time);

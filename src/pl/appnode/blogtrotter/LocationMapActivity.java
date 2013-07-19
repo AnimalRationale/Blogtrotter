@@ -1,6 +1,7 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
-import pl.twopointtwo.sitenote.DbHelper.FeedSiteNote;
+import pl.appnode.blogtrotter.DbHelper.FeedSiteNote;
+import pl.appnode.blogtrotter.R;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentValues;

@@ -1,6 +1,8 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.io.File;
+
+import pl.appnode.blogtrotter.R;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

@@ -1,4 +1,4 @@
-package pl.twopointtwo.sitenote;
+package pl.appnode.blogtrotter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import pl.twopointtwo.sitenote.DbHelper.FeedSiteNote;
+import pl.appnode.blogtrotter.DbHelper.FeedSiteNote;
+import pl.appnode.blogtrotter.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -40,22 +41,22 @@ public class MainActivity extends Activity {
 	private static final int EDIT_LOCATION_REQUEST = 1799;
 	private static final int EXPORT_NOTE_REQUEST = 1699;
 
-	public static final String EDIT_NOTE_LIST_INDEX = "pl.twopointtwo.sitenote.EDIT_NOTE_INDEX";
-	public static final String YOUR_PHOTO_START = "pl.twopointtwo.sitenote.dodajZdjecie";
-	public static final String SHOW_NOTE_FILE = "pl.twopointtwo.sitenote.SHOW_NOTE_FILE";
-	public static final String SHOW_NOTE_DATE = "pl.twopointtwo.sitenote.SHOW_NOTE_DATE";
-	public static final String SHOW_NOTE_NOTE = "pl.twopointtwo.sitenote.SHOW_NOTE_NOTE";
-	public static final String SHOW_NOTE_LOCATION = "pl.twopointtwo.sitenote.SHOW_NOTE_LOCATION";
-	public static final String SHOW_NOTE_LATITUDE = "pl.twopointtwo.sitenote.SHOW_NOTE_LATITUDE";
-	public static final String SHOW_NOTE_LATITUDE_REF = "pl.twopointtwo.sitenote.SHOW_NOTE_LATITUDE_REF";
-	public static final String SHOW_NOTE_LONGITUDE = "pl.twopointtwo.sitenote.SHOW_NOTE_LONGITUDE";
-	public static final String SHOW_NOTE_LONGITUDE_REF = "pl.twopointtwo.sitenote.SHOW_NOTE_LONGITUDE_REF";
-	public static final String SHOW_NOTE_EXIF_ORIENT = "pl.twopointtwo.sitenote.SHOW_NOTE_EXIF_ORIENT";
-	public static final String PHOTO_DIR = "/SiteNoteTmp/";
-	public static final String THUMB_DIR = "/SiteNoteThumbs/";
-	public static final String DB_ID = "pl.twopointtwo.sitenote.DB_ID";
-	public static final String THUMB_FILE = "pl.twopointtwo.sitenote.THUMB_FILE";
-	public static final String THUMB_ROTATION = "pl.twopointtwo.sitenote.THUMB_ROTATION";
+	public static final String EDIT_NOTE_LIST_INDEX = "pl.appnode.blogtrotter.EDIT_NOTE_INDEX";
+	public static final String YOUR_PHOTO_START = "pl.appnode.blogtrotter.dodajZdjecie";
+	public static final String SHOW_NOTE_FILE = "pl.appnode.blogtrotter.SHOW_NOTE_FILE";
+	public static final String SHOW_NOTE_DATE = "pl.appnode.blogtrotter.SHOW_NOTE_DATE";
+	public static final String SHOW_NOTE_NOTE = "pl.appnode.blogtrotter.SHOW_NOTE_NOTE";
+	public static final String SHOW_NOTE_LOCATION = "pl.appnode.blogtrotter.SHOW_NOTE_LOCATION";
+	public static final String SHOW_NOTE_LATITUDE = "pl.appnode.blogtrotter.SHOW_NOTE_LATITUDE";
+	public static final String SHOW_NOTE_LATITUDE_REF = "pl.appnode.blogtrotter.SHOW_NOTE_LATITUDE_REF";
+	public static final String SHOW_NOTE_LONGITUDE = "pl.appnode.blogtrotter.SHOW_NOTE_LONGITUDE";
+	public static final String SHOW_NOTE_LONGITUDE_REF = "pl.appnode.blogtrotter.SHOW_NOTE_LONGITUDE_REF";
+	public static final String SHOW_NOTE_EXIF_ORIENT = "pl.appnode.blogtrotter.SHOW_NOTE_EXIF_ORIENT";
+	public static final String PHOTO_DIR = "/Blogtrotter/";
+	public static final String THUMB_DIR = "/BlogtrotterThumbs/";
+	public static final String DB_ID = "pl.appnode.blogtrotter.DB_ID";
+	public static final String THUMB_FILE = "pl.appnode.blogtrotter.THUMB_FILE";
+	public static final String THUMB_ROTATION = "pl.appnode.blogtrotter.THUMB_ROTATION";
 
 	private static final String myURI = null;
 
@@ -482,7 +483,9 @@ public class MainActivity extends Activity {
 				DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LATITUDE,
 				DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LATITUDEREF,
 				DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDE,
-				DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF };
+				DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF,
+				DbHelper.FeedSiteNote.COLUMN_NAME_TAGS,
+				DbHelper.FeedSiteNote.COLUMN_NAME_PUBLISHED };
 
 		// How you want the results sorted in the resulting Cursor
 		String sortOrder = DbHelper.FeedSiteNote._ID + " DESC";
@@ -525,7 +528,9 @@ public class MainActivity extends Activity {
 						c.getString(c
 								.getColumnIndexOrThrow(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDE)),
 						c.getString(c
-								.getColumnIndexOrThrow(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF))));
+								.getColumnIndexOrThrow(DbHelper.FeedSiteNote.COLUMN_NAME_EXIF_GPS_LONGITUDEREF)),
+						c.getString(c.getColumnIndexOrThrow(DbHelper.FeedSiteNote.COLUMN_NAME_TAGS)),
+						c.getString(c.getColumnIndexOrThrow(DbHelper.FeedSiteNote.COLUMN_NAME_PUBLISHED))));
 				c.moveToNext();
 			}
 		}
