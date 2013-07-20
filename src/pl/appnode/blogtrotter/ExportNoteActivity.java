@@ -1,5 +1,6 @@
 package pl.appnode.blogtrotter;
 
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +17,16 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pl.appnode.blogtrotter.R;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class ExportNoteActivity extends Activity {
 	
@@ -47,6 +50,7 @@ public class ExportNoteActivity extends Activity {
 	private String time;
 	private String thumb;
 	private String photo;
+	private String encodedImage;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,7 @@ public class ExportNoteActivity extends Activity {
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 	    imm.restartInput(editNoteTitle);
 	    
-		Button button = (Button) findViewById(R.id.button_send_note);
+		Button button = (Button) findViewById(R.id.button_send_note);		
 		
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -99,11 +103,25 @@ public class ExportNoteActivity extends Activity {
 				new Thread(new Runnable() {
 					// Thread to stop network calls on the UI thread
 					public void run() {
+						
+						BitmapFactory.Options decodeBitmapOptions = new BitmapFactory.Options();
+						int scaleFactor = 4;
+						decodeBitmapOptions.inSampleSize = scaleFactor;
+						decodeBitmapOptions.inJustDecodeBounds = false;
+						decodeBitmapOptions.inPurgeable = true;
+						Bitmap bm = BitmapFactory.decodeFile(photo, decodeBitmapOptions);						
+				        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+				        byte[] byteArray = baos.toByteArray();
+				        int flag = Base64.NO_WRAP;
+				        encodedImage = Base64.encodeToString(byteArray, flag);
+				        // Log.d("LogInfo001", "ExNA - BASE64: " + encodedImage);
 						title = editNoteTitle.getText().toString();
 						if (title == null) {title = "No title";}
 						// Request the HTML
 						try {
 							JSONObject json = new JSONObject();
+							json.put("check_uploader", "yes");
 							json.put("pass", "Blogtrotter.v01.236");
 							json.put("note_id", note_id);
 							json.put("author", "Autor");
@@ -111,9 +129,8 @@ public class ExportNoteActivity extends Activity {
 							json.put("time", time);
 							json.put("title", title);
 							json.put("location", location);
-							json.put("note", note);
-							json.put("thumb", thumb);
-							json.put("photo", photo);							
+							json.put("note", note);							
+							json.put("photo", encodedImage);							
 							postData(json);							
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -136,7 +153,7 @@ public class ExportNoteActivity extends Activity {
 			nvp.add(new BasicNameValuePair("json", json.toString()));
 			// httppost.setHeader("Content-type", "application/json");
 			httppost.setEntity(new UrlEncodedFormEntity(nvp, "UTF-8"));
-			Log.d("LogInfo001", "ExNA - NVP: " + nvp);
+			// Log.d("LogInfo001", "ExNA - NVP: " + nvp);
 
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();
@@ -147,6 +164,7 @@ public class ExportNoteActivity extends Activity {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			Log.d("LogInfo001", "ExNA - Exception: " + e.toString());
 		}
 	}
 
