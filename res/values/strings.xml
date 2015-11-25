@@ -46,5 +46,18 @@
     <string name="blog_note_title_hint">Enter your blog note title&#8230;</string> 
     <string name="button_send_note">Send note</string>
     <string name="note_to_blog">Sending note to blog&#8230;</string>
-    
+    <string name="pref_blog_address">Blog address</string>
+    <string name="pref_blog_address_settings">Server settings</string>
+    <string name="pref_blog_address_summary">Address of blog with installed Blogtrotter Updater</string>
+    <string name="pref_blog_address_default">http://infodump.pl/note</string>
+    <string name="pref_blog_address_enter">Enter blog address</string>
+    <string name="pref_blog_author">Blog author</string>
+    <string name="pref_blog_author_settings">Author\'s name settings</string>
+    <string name="pref_blog_author_enter">Enter author\'s name</string>
+    <string name="pref_blog_author_summary">Name you want to use as author\'s name of your blog posts</string>
+    <string name="pref_blog_author_default">Alan Smithee</string>
+    <string name="pref_blog_author_id">One word nickname</string>
+    <string name="pref_blog_author_id_enter">Enter one word nickname</string>
+    <string name="pref_blog_author_id_summary">Short, one word id for your blog posts files on server</string>
+    <string name="pref_blog_author_id_default">asmithee</string>
 </resources>

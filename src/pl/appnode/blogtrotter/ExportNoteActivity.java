@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -21,10 +22,12 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -51,10 +54,18 @@ public class ExportNoteActivity extends Activity {
 	private String thumb;
 	private String photo;
 	private String encodedImage;
+	private Double rotation;
+	private String blogAuthor;
+	private String blogAuthorID;
+	private String blogAddress;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		blogAuthor = sharedPrefs.getString("blog_author", "");
+		blogAuthorID = sharedPrefs.getString("blog_author_id", "");
+		
 		setContentView(R.layout.activity_export_note);
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -80,8 +91,11 @@ public class ExportNoteActivity extends Activity {
 		note_id = photo.substring(photo.length() - 17);
 		note_id = note_id.replace(".jpg", "");
 		
-		Double rotation = Double.parseDouble(thumbRotation);
+		rotation = Double.parseDouble(thumbRotation);
 
+		TextView exportNoteDateView = (TextView) findViewById(R.id.exportNoteDate);
+		exportNoteDateView.setText(date + "   " + time);		
+		
 		ImgLoader imgLoader = new ImgLoader(this);
 		ImageView imageView = (ImageView) findViewById(R.id.imageView4);
 		imageView.setRotation(rotation.floatValue());
@@ -117,30 +131,45 @@ public class ExportNoteActivity extends Activity {
 				        encodedImage = Base64.encodeToString(byteArray, flag);
 				        // Log.d("LogInfo001", "ExNA - BASE64: " + encodedImage);
 						title = editNoteTitle.getText().toString();
-						if (title == null) {title = "No title";}
-						// Request the HTML
+						if (title == null) {title = "--";}
+						// Request HTML
 						try {
 							JSONObject json = new JSONObject();
 							json.put("check_uploader", "yes");
 							json.put("pass", "Blogtrotter.v01.236");
 							json.put("note_id", note_id);
-							json.put("author", "Autor");
+							json.put("author", blogAuthor);
+							json.put("author_id", blogAuthorID);
 							json.put("date", date);
 							json.put("time", time);
 							json.put("title", title);
 							json.put("location", location);
 							json.put("note", note);							
-							json.put("photo", encodedImage);							
+							json.put("photo", encodedImage);
+							if (rotation != 0) {
+								json.put("rotation", "yes");
+							} else {
+								json.put("rotation", "no");
+							}
 							postData(json);							
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
 					}
 				}).start();
-			}
-		});
+				finish();
+			}			
+		});     
 	}
 
+	@Override
+	public void finish() {
+		// Prepare data intent
+		Intent data = new Intent();
+		setResult(RESULT_OK, data);
+		super.finish();		
+	}
+	
 	public void postData(JSONObject json) throws JSONException {
 		HttpClient httpclient = new DefaultHttpClient();
 		String URL_BASE = "http://infodump.pl/note";
@@ -156,6 +185,9 @@ public class ExportNoteActivity extends Activity {
 			// Log.d("LogInfo001", "ExNA - NVP: " + nvp);
 
 			HttpResponse response = httpclient.execute(httppost);
+			StatusLine statusLine = response.getStatusLine();
+	        int statusCode = statusLine.getStatusCode();
+	        Log.d("LogInfo001", "StatusCode " + statusCode);
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
 				Log.d("LogInfo001",
@@ -166,11 +198,7 @@ public class ExportNoteActivity extends Activity {
 			e.printStackTrace();
 			Log.d("LogInfo001", "ExNA - Exception: " + e.toString());
 		}
-	}
-
-	private void sendNote() {
-
-	}
+	}	
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {

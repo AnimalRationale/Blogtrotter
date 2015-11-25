@@ -34,13 +34,15 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.newrelic.agent.android.NewRelic;
 
 public class MainActivity extends Activity {
-	private static final int CAMERA_REQUEST = 1888;
 	private static final int EDIT_NOTE_REQUEST = 1999;
+	private static final int CAMERA_REQUEST = 1888;	
 	private static final int EDIT_LOCATION_REQUEST = 1799;
 	private static final int EXPORT_NOTE_REQUEST = 1699;
-
+	private static final int SETTINGS_REQUEST = 1599;
+	
 	public static final String EDIT_NOTE_LIST_INDEX = "pl.appnode.blogtrotter.EDIT_NOTE_INDEX";
 	public static final String YOUR_PHOTO_START = "pl.appnode.blogtrotter.dodajZdjecie";
 	public static final String SHOW_NOTE_FILE = "pl.appnode.blogtrotter.SHOW_NOTE_FILE";
@@ -73,8 +75,18 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d("LogInfo001", "MA - onCreate");
+		
+		/*NewRelic.withApplicationToken(
+				"AA79c2d634ce90f6199ed47d5da142646cb690c3da"
+				).start(this.getApplication());*/
+		NewRelic.withApplicationToken(
+				"AA2968c3e5a6cfb0382eabe3ec00a4961241eab0bb"
+				).start(this.getApplication());		
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
 
 		if (savedInstanceState != null) {
 
@@ -219,8 +231,16 @@ public class MainActivity extends Activity {
 			addPhoto();
 		} else if (item.getItemId() == R.id.menu_big_map_button) {
 			bigMap();
+		} else if (item.getItemId() == R.id.menu_settings) {
+			settings();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void settings() {
+		Intent intentSettings = new Intent(getApplicationContext(),
+				SettingsActivity.class);
+		startActivityForResult(intentSettings, SETTINGS_REQUEST);
 	}
 
 	private void editNote(int listInd) {

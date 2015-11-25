@@ -1,27 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <ImageView
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:padding="10dip"
+    tools:context=".ExportNoteActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.81"
+        android:gravity="bottom|center|top"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/exportNoteDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/note_date"
+            android:textColor="@color/DarkGray" />        
+
+        <ImageView
             android:id="@+id/imageView4"
             android:layout_width="191dp"
             android:layout_height="259dp"
             android:src="@drawable/ic_launcher" />
 
-     <EditText
+        <EditText
             android:id="@+id/enterTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/blog_note_title_hint"
-            android:inputType="textMultiLine" />
-     <Button
-        android:id="@+id/button_send_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="sendNote"
-        android:text="@string/button_send_note" />
+            android:inputType="textMultiLine" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/button_send_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sendNote"
+            android:text="@string/button_send_note" />
+    </LinearLayout>
 
 </LinearLayout>

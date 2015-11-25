@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+   <PreferenceCategory
+        android:title="@string/pref_blog_address_settings"
+        android:key="blog_address_category">
+        <EditTextPreference
+            android:key="blog_address"
+            android:title="@string/pref_blog_address"
+            android:summary="@string/pref_blog_address_summary"
+            android:dialogTitle="@string/pref_blog_address"
+            android:dialogMessage="@string/pref_blog_address_enter"
+            android:defaultValue="@string/pref_blog_address_default" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_blog_author_settings"
+        android:key="blog_author_category">
+        <EditTextPreference
+            android:key="blog_author"
+            android:title="@string/pref_blog_author"
+            android:summary="@string/pref_blog_author_summary"
+            android:dialogTitle="@string/pref_blog_author"
+            android:dialogMessage="@string/pref_blog_author_enter"
+            android:defaultValue="@string/pref_blog_author_default" />
+        <EditTextPreference
+            android:key="blog_author_id"
+            android:title="@string/pref_blog_author_id"
+            android:summary="@string/pref_blog_author_id_summary"
+            android:dialogTitle="@string/pref_blog_author_id"
+            android:dialogMessage="@string/pref_blog_author_id_enter"
+            android:defaultValue="@string/pref_blog_author_id_default" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
