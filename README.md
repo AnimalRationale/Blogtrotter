@@ -2,6 +2,7 @@
 
 Blogging on the run - snap a photo, write some text and send your note to your blog. 
 
+ * Create location aware notes with photos
  * Export notes (photo and text) in JSON format to any website with simple PHP [uploader](https://github.com/AnimalRationale/noteuploader)
  * Pin photos to chosen places on map without losing original geotag
  * Pinch to zoom in photo view tab
